@@ -72,3 +72,13 @@ class EmployeeApiUpdateView(GenericAPIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
+
+
+class EmployeeDetailApiView(GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = EmployeeSerializer
+
+    def get(self, request, *args, **kwargs):
+        employee_id = get_object_or_404(Employee, pk=self.kwargs.get('pk'))
+        serializer = EmployeeSerializer(employee_id)
+        return Response(serializer.data)

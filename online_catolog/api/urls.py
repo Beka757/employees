@@ -1,7 +1,7 @@
 from django.urls import path
 from api.views import (
     EmployeeListAPIView, RegistrationApiView, LogoutView,
-    EmployeeApiCreateView, EmployeeApiUpdateView
+    EmployeeApiCreateView, EmployeeApiUpdateView, EmployeeDetailApiView
 )
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework import permissions
@@ -27,5 +27,6 @@ urlpatterns = [
     path('login/', obtain_auth_token, name='api_token_auth'),
     path('logout/', LogoutView.as_view(), name='api_token_auth'),
     path('employee/create/', EmployeeApiCreateView.as_view()),
-    path('employee/<int:pk>/', EmployeeApiUpdateView.as_view())
+    path('employee/<int:pk>/update/', EmployeeApiUpdateView.as_view()),
+    path('employee/<int:pk>/', EmployeeDetailApiView.as_view())
 ]
